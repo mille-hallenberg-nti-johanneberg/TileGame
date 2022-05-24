@@ -1,6 +1,5 @@
 package main.entity.creature;
 
-import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -32,6 +31,8 @@ public abstract class Creature extends Entity {
 	}
 	
 	public void attack() {
+//		Handler.instance.getAudioManager().playSound(Assets.audio_item);
+		
 		Rectangle attackBox = new Rectangle((int)(x + direction.x * width), (int)(y + direction.y * height), width, height);
 		ArrayList<Entity> intersectedEntities = intersectedEntities(attackBox);
 		

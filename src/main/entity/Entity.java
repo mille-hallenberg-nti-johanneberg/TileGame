@@ -7,9 +7,15 @@ import java.util.ArrayList;
 
 import main.Handler;
 import main.entity.creature.Creature;
+import main.entity.item.ItemEntity;
 import main.tile.Tile;
 
 public abstract class Entity implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public final static int DEFAULT_HEALTH = 15;
 	
 	protected int health = DEFAULT_HEALTH;
@@ -30,6 +36,8 @@ public abstract class Entity implements Serializable{
 			if (e == this) 
 				continue;
 			if (e.getClass().getSuperclass() == Creature.class) 
+				continue;
+			if (e.getClass() == ItemEntity.class) 
 				continue;
 			if (e.getCollisionBounds(0, 0).intersects(getCollisionBounds(xOffset, yOffset))) 
 				return true;

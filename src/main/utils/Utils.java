@@ -1,6 +1,7 @@
 package main.utils;
 
 import java.io.*;
+import java.util.ArrayList;
 
 import main.entity.statics.Tree;
 
@@ -32,16 +33,6 @@ public class Utils {
 	}
 	
 	public static void writeObjectToFile(String path, Object obj) {
-//		try (FileOutputStream fos = new FileOutputStream("path");
-//			     ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-//
-//			    // write object to file
-//			    oos.writeObject(obj);
-//
-//			} catch (IOException ex) {
-//			    ex.printStackTrace();
-//			}
-
 		try {
 			FileOutputStream f = new FileOutputStream(new File(path));
 			ObjectOutputStream o = new ObjectOutputStream(f);
@@ -60,6 +51,27 @@ public class Utils {
 			System.out.println("Error initializing stream");
 		}
 
+	}
+	
+	public static void writeObjectsToFile(String path, ArrayList<Object> objs) {
+		try {
+			FileOutputStream f = new FileOutputStream(new File(path));
+			ObjectOutputStream o = new ObjectOutputStream(f);
+			
+			// Write objects to file
+			o.writeObject(objs);
+			
+			o.close();
+			f.close();
+			
+			System.out.println("Saved Object: " + objs.getClass());
+			
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found");
+		} catch (IOException e) {
+			System.out.println("Error initializing stream");
+		}
+		
 	}
 	
 	public static Object readObjectFromFile(String path) {
@@ -83,6 +95,36 @@ public class Utils {
 		oi.close();
 		fi.close();
 		return obj;
+		
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found");
+		} catch (IOException e) {
+			System.out.println("Error initializing stream");
+		}
+		return null;
+	}
+	
+	public static ArrayList<Object> readObjectsFromFile(String path) {
+		try {
+		FileInputStream fi = new FileInputStream(new File(path));
+		ObjectInputStream oi = new ObjectInputStream(fi);
+
+		// Read objects
+		ArrayList<Object> objs = null;
+		
+		try {
+			objs = (ArrayList<Object>)oi.readObject();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+//		System.out.println(pr1.toString());
+//		System.out.println(pr2.toString());
+
+		oi.close();
+		fi.close();
+		return objs;
 		
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found");

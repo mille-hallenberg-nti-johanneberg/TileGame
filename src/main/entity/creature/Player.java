@@ -7,10 +7,12 @@ import java.awt.Rectangle;
 import main.Handler;
 import main.gfx.Assets;
 import main.input.KeyManager;
+import main.item.Item;
 import main.tile.Tile;
 
 public class Player extends Creature{
 
+	
 	public Player(int x, int y) {
 		super(x, y, 32, 32);
 		bounds.x = 0;

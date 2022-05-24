@@ -17,6 +17,7 @@ public class Tree extends StaticEntity{
 	public void update() {
 		if (health <= 0) {
 			System.out.println("Remove me");
+			Handler.instance.getAudioManager().playSound(Assets.audio_hurt);
 			Handler.instance.getEntityManager().addEntityToDeletionQueue(this);
 		}
 	}

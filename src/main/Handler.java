@@ -1,5 +1,6 @@
 package main;
 
+import main.audio.AudioManager;
 import main.entity.EntityManager;
 import main.gfx.GameCamera;
 import main.input.KeyManager;
@@ -11,6 +12,7 @@ public class Handler {
 	
 	private Game game;
 	private World world;
+	private AudioManager audioManager;
 	
 	public Handler(Game game) {
 		if (instance == null) {
@@ -45,5 +47,13 @@ public class Handler {
 	
 	public EntityManager getEntityManager() {
 		return world.getEntityManager();
+	}
+	
+	public void setAudioManager(AudioManager audioManager){
+		this.audioManager = audioManager;
+	}
+	
+	public AudioManager getAudioManager(){
+		return audioManager;
 	}
 }

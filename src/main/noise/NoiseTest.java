@@ -23,12 +23,12 @@ public class NoiseTest {
 		{
 			for (int x = 0; x < WIDTH; x++)
 			{
-				double value = noise.eval(x / FEATURE_SIZE, y / FEATURE_SIZE, 0.0);
-				double value2 = noise2.eval(x / FEATURE_SIZE, y / FEATURE_SIZE, 0.0);
+				double value = PerlinNoise.noise(3.14,42,7);
+				//double value2 = noise2.eval(x / FEATURE_SIZE, y / FEATURE_SIZE, 0.0);
 				
 				int rgb = 0x010101 * (int)((value + 1) * 127.5);
-				rgb = 0x0279b0; //Grass
-				if (value - value2 > 0.8f) rgb = 0x289600;
+//				rgb = 0x0279b0; //Grass
+//				if (value - value2 > 0.8f) rgb = 0x289600;
 //				if (value >= 0.0f) rgb = 0x0279b0; //Grass
 //				else if (value >= -0.2f) rgb = 0xfff700;
 //				else rgb = 0x289600;

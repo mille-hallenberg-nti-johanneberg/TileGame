@@ -10,6 +10,12 @@ public class Chunk implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	public Chunk(){
+		entities = new ArrayList<>();
+	}
+	
+	public final static int chunkSize = 8;
 	private ArrayList<Entity> entities;
 	
 	public ArrayList<Entity> getEntities() {
@@ -24,6 +30,6 @@ public class Chunk implements Serializable{
 		this.entities.add(e);
 	}
 	public void removeEntity(Entity e) {
-		this.entities.add(e);
+		this.entities.remove(e);
 	}
 }

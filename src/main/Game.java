@@ -3,11 +3,14 @@ package main;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
+import main.audio.AudioManager;
 import main.gfx.Assets;
 import main.gfx.GameCamera;
 import main.input.KeyManager;
 import main.input.MouseManager;
 import main.world.World;
+import main.world.WorldGenerator;
+import main.world.WorldIO;
 
 //The heart of the application. Contains a 60fps locked game loop which calls an update and render function.
 public class Game implements Runnable{
@@ -39,24 +42,28 @@ public class Game implements Runnable{
 		Assets.init();
 		
 		new Handler(this);
+		Handler.instance.setAudioManager(new AudioManager());
 		
 		window.getFrame().addKeyListener(keyManager);
 		window.getFrame().addMouseListener(mouseManager);
 		window.getFrame().addMouseMotionListener(mouseManager);
 		window.getCanvas().addMouseListener(mouseManager);
 		window.getCanvas().addMouseMotionListener(mouseManager);
-		
-		world = new World("res/worlds/world_1");
+				
+//		Handler.instance.setWorld(WorldGenerator.createWorld(500, 500, 500, "res/worlds/world_1"));
+		Handler.instance.setWorld(WorldIO.loadWorld("res/worlds/world_1"));
+		//world = Handler.instance.getWorld();
 		gameCamera = new GameCamera(0, 0);
 		
-		Handler.instance.setWorld(world);
+		
 	}
 	
 	void update() {
 		keyManager.update();
 		mouseManager.update();
 		
-		world.update();
+		Handler.instance.getWorld().update();
+		Handler.instance.getAudioManager().update();
 
 		gameCamera.centerOnEntity(Handler.instance.getEntityManager().getPlayer());
 	}
@@ -72,7 +79,7 @@ public class Game implements Runnable{
 		g.clearRect(0, 0, Window.getWidth(), Window.getHeight());
 		
 		//Draw here
-		world.render(g);
+		Handler.instance.getWorld().render(g);
 		
 		bs.show();
 		g.dispose();
