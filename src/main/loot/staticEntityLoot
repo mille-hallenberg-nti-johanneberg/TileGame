@@ -1,0 +1,11 @@
+pine_tree:
+{
+	stick 		1 2 
+	log 		1 1 
+	pine_cone 	1 1 
+}
+
+rock:
+{
+	stick 		1 2 
+}
